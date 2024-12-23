@@ -244,7 +244,7 @@ int getComputerMove(char **board) {
   { // Check Rows
     int position = 0;
     for (int i = 0; i < 3; i++) {
-      int userMarks = 0, emptyBoxs = 0, computerMarks = 0;
+      int userMarks = 0, emptyBoxes = 0, computerMarks = 0;
       bool updatePosition = true;
       for (int j = 0; j < 3; j++) {
         if (updatePosition)
@@ -257,13 +257,13 @@ int getComputerMove(char **board) {
           computerMarks++;
 
         if (board[i][j] == '-') {
-          emptyBoxs++;
+          emptyBoxes++;
           position = j + (i * 3 + 1); // to correct the position
           updatePosition = false;
         }
       }
 
-      if ((userMarks == 2 || computerMarks == 2) && emptyBoxs == 1)
+      if ((userMarks == 2 || computerMarks == 2) && emptyBoxes == 1)
         return position;
     }
   }
@@ -271,7 +271,7 @@ int getComputerMove(char **board) {
   { // Check columns
     int position = 0;
     for (int i = 0; i < 3; i++) {
-      int userMarks = 0, emptyBoxs = 0, computerMarks = 0;
+      int userMarks = 0, emptyBoxes = 0, computerMarks = 0;
       bool updatePosition = true;
       for (int j = 0; j < 3; j++) {
         if (updatePosition)
@@ -284,13 +284,13 @@ int getComputerMove(char **board) {
           computerMarks++;
 
         if (board[j][i] == '-') {
-          emptyBoxs++;
+          emptyBoxes++;
           position = j * 3 + i + 1; // to correct the position
           updatePosition = false;
         }
       }
 
-      if ((userMarks == 2 || computerMarks == 2) && emptyBoxs == 1)
+      if ((userMarks == 2 || computerMarks == 2) && emptyBoxes == 1)
         return position;
     }
   }
@@ -298,7 +298,7 @@ int getComputerMove(char **board) {
   // Check main diagonal
   {
     int position = 0;
-    int userMarks = 0, emptyBoxs = 0, computerMarks = 0;
+    int userMarks = 0, emptyBoxes = 0, computerMarks = 0;
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
         position++;
@@ -307,21 +307,21 @@ int getComputerMove(char **board) {
             userMarks++;
 
           if (board[i][j] == '-')
-            emptyBoxs++;
+            emptyBoxes++;
 
           if (board[i][j] == 'O')
             computerMarks++;
         }
       }
 
-      if ((userMarks == 2 || computerMarks == 2) && emptyBoxs == 1)
+      if ((userMarks == 2 || computerMarks == 2) && emptyBoxes == 1)
         return position;
     }
   }
 
   // Anti-Diagonal
   {
-    int position = 0, userMarks = 0, emptyBoxs = 0, computerMarks = 0;
+    int position = 0, userMarks = 0, emptyBoxes = 0, computerMarks = 0;
     bool updatePosition = true;
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
@@ -335,13 +335,13 @@ int getComputerMove(char **board) {
             computerMarks++;
 
           if (board[i][j] == '-') {
-            emptyBoxs++;
+            emptyBoxes++;
             updatePosition = false;
           }
         }
       }
 
-      if ((userMarks == 2 || computerMarks == 2) && emptyBoxs == 1)
+      if ((userMarks == 2 || computerMarks == 2) && emptyBoxes == 1)
         return position;
     }
   }
