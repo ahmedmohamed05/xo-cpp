@@ -297,20 +297,22 @@ int getComputerMove(char **board) {
 
   // Check main diagonal
   {
-    int position = 0;
-    int userMarks = 0, emptyBoxes = 0, computerMarks = 0;
+    int position = 0, userMarks = 0, emptyBoxes = 0, computerMarks = 0;
+    bool updatePosition = true;
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        position++;
+        if (updatePosition)
+          position++;
         if (i == j) {
           if (board[i][j] == 'X')
             userMarks++;
-
-          if (board[i][j] == '-')
-            emptyBoxes++;
-
           if (board[i][j] == 'O')
             computerMarks++;
+
+          if (board[i][j] == '-') {
+            emptyBoxes++;
+            updatePosition = false;
+          }
         }
       }
 
