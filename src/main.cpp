@@ -1,5 +1,5 @@
-#include "./classes/game.h"
-#include "./libs/input.h"
+#include "./include/game.h"
+#include "./libs/input-cpp/input.h"
 #include <iostream>
 
 void printPlayer(XOPlayer *p);
@@ -24,7 +24,7 @@ int main() {
     int rounds = readRounds();
     play(playingOption, rounds);
 
-    playAgain = Input::readCharacter("Do you want ot play again [y, n]: ");
+    playAgain = input::readChar("Do you want ot play again [y, n]: ");
   }
 
   return 0;
@@ -35,15 +35,15 @@ PlayingOptions readPlayingOption() {
   std::cout << "[1] You Can play locally.\n";
   std::cout << "[2] Play with the computer.\n";
 
-  int choice = Input::readIntInRange("Enter 1 or 2: ", 1, 2);
+  int choice = input::readNumberInRange<int>("Enter 1 or 2: ", 1, 2);
   return PlayingOptions(choice);
 }
 
 int readRounds() {
-  int rounds = Input::readInt("Enter number of rounds: ");
+  int rounds = input::readInt("Enter number of rounds: ");
   while (rounds < 0) {
     std::cerr << "Number of rounds must be a  positive number\n";
-    rounds = Input::readInt("Enter number of rounds: ");
+    rounds = input::readInt("Enter number of rounds: ");
   }
 
   return rounds;
@@ -116,13 +116,13 @@ void playAgainstComputer(int rounds) {
       }
 
       int playingPosition =
-          Input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+          input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
 
       bool success = game.play(playingPosition);
       while (!success) {
         std::cerr << "This box already played, Choice another one\n";
         playingPosition =
-            Input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+            input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
         success = game.play(playingPosition);
       }
     }
@@ -228,13 +228,13 @@ void playRound(XOGame *game, int currentRound, int totalRounds) {
     std::cout << game->howsTurn() << " to play\n";
 
     int playingPosition =
-        Input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+        input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
 
     bool success = game->play(playingPosition);
     while (!success) {
       std::cerr << "This box already played on, Choice another one\n";
       playingPosition =
-          Input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+          input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
       success = game->play(playingPosition);
     }
   }
