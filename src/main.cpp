@@ -40,10 +40,10 @@ PlayingOptions readPlayingOption() {
 }
 
 int readRounds() {
-  int rounds = input::readInt("Enter number of rounds: ");
+  int rounds = input::readNumber<int>("Enter number of rounds: ");
   while (rounds < 0) {
     std::cerr << "Number of rounds must be a  positive number\n";
-    rounds = input::readInt("Enter number of rounds: ");
+    rounds = input::readNumber<int>("Enter number of rounds: ");
   }
 
   return rounds;
@@ -115,14 +115,14 @@ void playAgainstComputer(int rounds) {
         continue;
       }
 
-      int playingPosition =
-          input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+      int playingPosition = input::readNumberInRange<int>(
+          "Enter Playing Position [1, 9]: ", 1, 9);
 
       bool success = game.play(playingPosition);
       while (!success) {
         std::cerr << "This box already played, Choice another one\n";
-        playingPosition =
-            input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+        playingPosition = input::readNumberInRange<int>(
+            "Enter Playing Position [1, 9]: ", 1, 9);
         success = game.play(playingPosition);
       }
     }
@@ -174,6 +174,9 @@ void printFinalResult(XOGame::results result) {
     break;
   case XOGame::O:
     std::cout << "Congratulation O player won, !!\n";
+    break;
+  case XOGame::NotDoneYet:
+    std::cout << "Game still in progress...\n";
     break;
   }
 }
@@ -228,13 +231,13 @@ void playRound(XOGame *game, int currentRound, int totalRounds) {
     std::cout << game->howsTurn() << " to play\n";
 
     int playingPosition =
-        input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+        input::readNumberInRange<int>("Enter Playing Position [1, 9]: ", 1, 9);
 
     bool success = game->play(playingPosition);
     while (!success) {
       std::cerr << "This box already played on, Choice another one\n";
-      playingPosition =
-          input::readIntInRange("Enter Playing Position [1, 9]: ", 1, 9);
+      playingPosition = input::readNumberInRange<int>(
+          "Enter Playing Position [1, 9]: ", 1, 9);
       success = game->play(playingPosition);
     }
   }

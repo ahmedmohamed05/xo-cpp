@@ -90,7 +90,8 @@ public:
   }
 
   ~XOGame() {
-    delete _p1, _p2;
+    delete _p1;
+    delete _p2;
     for (int i = 0; i < 3; i++) {
       delete[] _board[i];
     }
